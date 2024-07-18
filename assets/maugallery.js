@@ -235,29 +235,40 @@
         console.error(`Unknown tags position: ${position}`);
       }
     },
+
     filterByTag() {
-      if ($(this).hasClass("active-tag")) {
-        return;
+      var $clickedTag = $(this);
+      var tag = $clickedTag.data("images-toggle");
+  
+      // Retirer la classe active de tous les tags sauf celui cliqué
+      $(".tags-bar .nav-link").not($clickedTag).removeClass("active active-tag");
+  
+      if ($clickedTag.hasClass("active-tag")) {
+          // Si le tag cliqué est déjà actif, ne rien faire
+          return;
       }
-      $(".active-tag").removeClass("active active-tag");
-      $(this).addClass("active-tag");
+  
+      // Ajouter la classe active aux tags cliqués
+      $clickedTag.addClass("active active-tag");
+  
+      // Afficher ou masquer les éléments en fonction du tag cliqué
+      if (tag === "all") {
+          $(".gallery-item").parents(".item-column").show(300);
+      } else {
+          $(".gallery-item").each(function() {
+              if ($(this).data("gallery-tag") === tag) {
+                  $(this).parents(".item-column").show(300);
+              } else {
+                  $(this).parents(".item-column").hide();
+              }
+          });
+      }
+  }
+  
+  
+  
 
-      var tag = $(this).data("images-toggle");
-
-      $(".gallery-item").each(function() {
-        $(this)
-          .parents(".item-column")
-          .hide();
-        if (tag === "all") {
-          $(this)
-            .parents(".item-column")
-            .show(300);
-        } else if ($(this).data("gallery-tag") === tag) {
-          $(this)
-            .parents(".item-column")
-            .show(300);
-        }
-      });
-    }
+  
+  
   };
 })(jQuery);
