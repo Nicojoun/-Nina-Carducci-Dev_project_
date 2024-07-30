@@ -106,12 +106,6 @@ body {
 	border-radius:0 ;
 }
 
-.tags-bar .nav-link.active-tag {
-    background-color: #BEB45A;
-	color: #fff;
-	border-radius:0 ;
-}
-
 .tags-bar .nav-link {
     cursor: default;
 }
